@@ -1,4 +1,4 @@
-package main
+package algorithms
 
 /*Leetcode: https://leetcode.com/problems/word-subsets/
 Results :

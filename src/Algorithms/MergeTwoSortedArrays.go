@@ -1,4 +1,4 @@
-package main
+package algorithms
 
 //func main() {
 //	arr1 := []int{1, 5, 9, 10, 15, 20}

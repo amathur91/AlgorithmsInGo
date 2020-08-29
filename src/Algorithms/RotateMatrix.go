@@ -1,4 +1,4 @@
-package main
+package algorithms
 /**
 Problem:https://leetcode.com/problems/rotate-image
 Results :
