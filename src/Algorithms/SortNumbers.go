@@ -13,13 +13,13 @@ Runtime: 0 ms
 Memory Usage: 2.1 MB
 Submitted: 1 minute ago
 
- */
+*/
 func SortNumbers(data *[]int) {
 	lowIndex := 0
 	middleIndex := 0
 	highIndex := len(*data) - 1
 
-	for ; middleIndex <= highIndex; {
+	for middleIndex <= highIndex {
 		if (*data)[middleIndex] == 0 {
 			//swap lowIndex and middle index
 			//increment both
