@@ -15,7 +15,7 @@ Runtime: 0 ms
 Memory Usage: 2.2 MB
 
  */
-type CacheKey struct {
+type CacheKeyEntry struct {
 	firstPtr int
 	secondPtr int
 	thirdPtr int
@@ -30,12 +30,12 @@ func IsInterleave(s1 string, s2 string, s3 string) bool {
 	firstStrLength := len(s1)
 	secondStringPtr := 0
 	secondStrLength := len(s2)
-	cacheMap := make(map[CacheKey]bool)
+	cacheMap := make(map[CacheKeyEntry]bool)
 	return checkStringInterleaving(&s3, firstStrPtr, firstStrLength, secondStringPtr, secondStrLength, &s1, &s2, 0, &cacheMap)
 
 }
 
-func checkStringInterleaving(targetString *string, firstStrPtr int, firstStringLength int, secondStrPtr int, secondStrLength int, firstString *string, secondString *string, thirdStringPtr int, cache *map[CacheKey]bool) bool {
+func checkStringInterleaving(targetString *string, firstStrPtr int, firstStringLength int, secondStrPtr int, secondStrLength int, firstString *string, secondString *string, thirdStringPtr int, cache *map[CacheKeyEntry]bool) bool {
 	if firstStrPtr == firstStringLength  && secondStrPtr == secondStrLength && thirdStringPtr == len(*targetString) {
 		return true //we have reached length of the target string matching all the characters of 1 and 2nd string
 	}
@@ -47,7 +47,7 @@ func checkStringInterleaving(targetString *string, firstStrPtr int, firstStringL
 	if firstStrPtr < firstStringLength {
 		letterAtFirstString = string((*firstString)[firstStrPtr])
 		if strings.EqualFold(letterAtFirstString, letterAtThirdString) {
-			key := CacheKey{firstPtr: firstStrPtr + 1, secondPtr: secondStrPtr, thirdPtr: thirdStringPtr + 1}
+			key := CacheKeyEntry{firstPtr: firstStrPtr + 1, secondPtr: secondStrPtr, thirdPtr: thirdStringPtr + 1}
 			value, contains := (*cache)[key]
 			if !contains {
 				result1 = checkStringInterleaving(targetString, firstStrPtr+1, firstStringLength, secondStrPtr, secondStrLength, firstString, secondString, thirdStringPtr+1, cache)
@@ -60,7 +60,7 @@ func checkStringInterleaving(targetString *string, firstStrPtr int, firstStringL
 	if secondStrPtr < secondStrLength {
 		letterAtSecondString = string((*secondString)[secondStrPtr])
 		if strings.EqualFold(letterAtSecondString, letterAtThirdString) {
-			key := CacheKey{firstPtr: firstStrPtr, secondPtr: secondStrPtr + 1, thirdPtr: thirdStringPtr + 1}
+			key := CacheKeyEntry{firstPtr: firstStrPtr, secondPtr: secondStrPtr + 1, thirdPtr: thirdStringPtr + 1}
 			value, contains := (*cache)[key]
 			if !contains {
 				result2 = checkStringInterleaving(targetString, firstStrPtr, firstStringLength, secondStrPtr+1, secondStrLength, firstString, secondString, thirdStringPtr+1, cache)
