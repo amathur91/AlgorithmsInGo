@@ -2,7 +2,7 @@ package algorithms
 
 import (
 	"fmt"
-	"models"
+	. "models"
 )
 
 /**
@@ -31,9 +31,9 @@ Submitted: 0 minutes ago
 //	printTreeInOrder(invertedTree)
 //}
 
-func createInvertedTree(root *models.TreeNode) *models.TreeNode{
+func createInvertedTree(root *TreeNode) *TreeNode {
 	if root != nil {
-		duplicateNode := &models.TreeNode{Val: root.Val}
+		duplicateNode := &TreeNode{Val: root.Val}
 		duplicateNode.Left = createInvertedTree(root.Right)
 		duplicateNode.Right = createInvertedTree(root.Left)
 		return duplicateNode
@@ -41,7 +41,7 @@ func createInvertedTree(root *models.TreeNode) *models.TreeNode{
 	return nil
 }
 
-func printTreeInOrder(root *models.TreeNode) {
+func printTreeInOrder(root *TreeNode) {
 	if root != nil {
 		printTreeInOrder(root.Left)
 		fmt.Printf("%d ",root.Val)
